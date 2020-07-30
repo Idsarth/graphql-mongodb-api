@@ -1,9 +1,8 @@
 import 'reflect-metadata'
-import { Env } from './environment'
+import { Server } from './server'
 
 const main = async () => {
-  const app = await server.start()
-  app.listen(Env.PORT)
+  const app = await Server.start()
 }
 
 main()
