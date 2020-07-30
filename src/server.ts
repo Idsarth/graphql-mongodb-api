@@ -10,19 +10,19 @@ import { Env } from './environment'
 export class Server {
   public app: Application
 
-  private constructor() {
+  constructor() {
     this.app = express()
   }
 
-  static start(): void {
-    const server = new ApolloServer({
-      schema: await buildSchema({
-        resolvers: [],
-        validate: false,
-        emitSchemaFile: true
-      }),
-      context: ({ req, res } => ({ req, res }))
+  async start (cb: Function): Promise<void> {
+    const schema = await buildSchema({
+      resolvers: [],
+      emitSchemaFile: true,
+      validate: false
     })
-    server.applyMiddleware({ path: '/graphql' })
+    const server = new ApolloServer({ schema })
+    server.applyMiddleware({ app: this.app, path: '/graphql' })
+
+    this.app.listen(Env.PORT, cb())
   }
 }
