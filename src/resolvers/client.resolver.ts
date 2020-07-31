@@ -47,7 +47,6 @@ export class ClientResolver {
     return true
   }
 
-  // Un pago pertenece a un solo cliente, y el cliente puede tener muchos pagos
   @Mutation(() => Client)
   async addPaymentToClient(
     @Arg('id', () => ID) id: string,
@@ -65,11 +64,6 @@ export class ClientResolver {
     const result = await ClientEntity
     .find()
     .populate({ path: 'identifier_payments', match: { status } })
-    // id_client
-    // -  name_client
-    // -  total_pay (Cantidad de Pagos)
-    // -  total_amount (Sumatoria de los montos de los pagos)
-    // - avg_amount ( total_amount / total_pay  )
 
     const payload: Array<PaymentFilter> = []
     result.map(result => {
