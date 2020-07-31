@@ -6,6 +6,8 @@ import { buildSchema } from 'type-graphql'
 import { Env } from './environment'
 
 // Import resolvers
+import { ClientResolver } from './resolvers/client.resolver'
+import { PaymentResolver } from './resolvers/payment.resolver'
 
 export class Server {
   public app: Application
@@ -16,7 +18,7 @@ export class Server {
 
   async start (cb: Function): Promise<void> {
     const schema = await buildSchema({
-      resolvers: [],
+      resolvers: [ClientResolver],
       emitSchemaFile: true,
       validate: false
     })
