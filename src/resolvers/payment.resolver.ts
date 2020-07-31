@@ -6,7 +6,7 @@ import { PaymentInput } from './inputs/payment.input'
 export class PaymentResolver {
   @Query(() => [Payment])
   async allPayment() {
-    return PaymentEntity.find()
+    return await PaymentEntity.find()
   }
 
   @Mutation(() => Payment)

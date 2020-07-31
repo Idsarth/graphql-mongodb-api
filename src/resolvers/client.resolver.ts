@@ -17,13 +17,13 @@ export class ClientResolver {
   }
 
   @Mutation(() => Boolean)
-  async deletePayment(@Arg("id", () => String) id: string) {
+  async deleteClient(@Arg("id", () => String) id: string) {
     await ClientEntity.deleteOne({_id: id})
     return true
   }
 
   @Mutation(() => Boolean)
-  async updatePayment(
+  async updateClient(
     @Arg("id", () => String) id: string,
     @Arg("variables", () => ClientInput) variables: ClientInput) {
     await ClientEntity.update({ _id: id }, variables)

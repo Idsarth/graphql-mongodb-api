@@ -18,7 +18,7 @@ export class Server {
 
   async start (cb: Function): Promise<void> {
     const schema = await buildSchema({
-      resolvers: [ClientResolver],
+      resolvers: [ClientResolver, PaymentResolver],
       emitSchemaFile: true,
       validate: false
     })

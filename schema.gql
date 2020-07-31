@@ -25,10 +25,40 @@ scalar DateTime
 
 type Mutation {
   createClient(variables: ClientInput!): Client!
-  deletePayment(id: String!): Boolean!
-  updatePayment(id: String!, variables: ClientInput!): Boolean!
+  createPayment(variables: PaymentInput!): Payment!
+  deleteClient(id: String!): Boolean!
+  updateClient(id: String!, variables: ClientInput!): Boolean!
+}
+
+"""Entity client"""
+type Payment {
+  _id: ID!
+  amount: Int!
+  coin: String!
+  created_at: DateTime!
+  identifier: String!
+  identifier_client: String!
+  product_name: String!
+  status: payment_status!
+}
+
+"""payment status"""
+enum payment_status {
+  CREATE
+  PAID
+  PENDING
+}
+
+input PaymentInput {
+  amount: Float!
+  coin: String!
+  identifier: String!
+  identifier_client: ID!
+  product_name: String!
+  status: String!
 }
 
 type Query {
   allClient: [Client!]!
+  allPayment: [Payment!]!
 }

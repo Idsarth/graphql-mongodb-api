@@ -1,24 +1,25 @@
 import { InputType, Field, ID } from 'type-graphql'
 import { ObjectId } from 'mongodb'
+import { PaymentStatus } from '../../entities/payment.entity'
 
 @InputType()
 export class PaymentInput {
 
   @Field()
-  public identifier: string
+  identifier: string
 
   @Field()
-  public amount: number
+  amount: number
 
   @Field()
-  public coin: string
+  coin: string
 
   @Field()
-  public product_name: string
+  product_name: string
 
   @Field()
-  public status: string
+  status: PaymentStatus
 
   @Field(() => ID)
-  public identifier_client: ObjectId
+  identifier_client: ObjectId
 }

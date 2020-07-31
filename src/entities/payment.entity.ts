@@ -19,7 +19,7 @@ export class Payment {
   @Field(() => ID)
   readonly _id: ObjectId
 
-  @Field()
+  @Field(() => String)
   @Property({ required: true, type: String, unique: true })
   identifier: string
 
@@ -27,24 +27,24 @@ export class Payment {
   @Property({ required: true, type: Number })
   amount: number
 
-  @Field()
+  @Field(() => String)
   @Property({ required: true, type: String })
   coin: string
 
-  @Field()
+  @Field(() => String)
   @Property({ required: true, type: String })
   product_name: string
 
-  @Field()
-  @Property({ required: true, type: PaymentStatus })
+  @Field(() => PaymentStatus)
+  @Property({ required: true, type: String })
   status: PaymentStatus
 
-  @Field()
+  @Field(() => String)
   @Property({ required: true, ref: Client })
   identifier_client: Ref<Client>
 
-  @Field()
-  @Property({ type: Date })
+  @Field(() => Date)
+  @Property({ type: Date, default: new Date() })
   readonly created_at: Date
 }
 
