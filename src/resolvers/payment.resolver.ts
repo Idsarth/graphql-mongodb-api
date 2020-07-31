@@ -8,10 +8,4 @@ export class PaymentResolver {
   async allPayment() {
     return await PaymentEntity.find()
   }
-
-  @Mutation(() => Payment)
-  async createPayment(@Arg('variables', () => PaymentInput) variables: PaymentInput) {
-    const newPayment = (await PaymentEntity.create(variables)).save()
-    return newPayment
-  }
 }

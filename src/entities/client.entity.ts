@@ -23,12 +23,12 @@ export class Client {
   phone: string
 
   // relationship one to many to document payments
-  @Field()
-  @Property({ ref: Payment, default: [] })
-  identifier_payments: Ref<Payment>[]
+  @Field(() => [Payment])
+  @Property({ ref: Payment, type: ObjectId })
+  readonly identifier_payments: Ref<Payment>[]
 
   @Field()
-  @Property({ type: Date, default: new Date() })
+  @Property({ type: Date, default: Date.now })
   readonly created_at: Date
 }
 

@@ -39,12 +39,8 @@ export class Payment {
   @Property({ required: true, type: String })
   status: PaymentStatus
 
-  @Field(() => String)
-  @Property({ required: true, ref: Client })
-  identifier_client: Ref<Client>
-
   @Field(() => Date)
-  @Property({ type: Date, default: new Date() })
+  @Property({ type: Date, default: Date.now })
   readonly created_at: Date
 }
 

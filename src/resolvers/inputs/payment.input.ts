@@ -1,5 +1,4 @@
-import { InputType, Field, ID } from 'type-graphql'
-import { ObjectId } from 'mongodb'
+import { InputType, Field } from 'type-graphql'
 import { PaymentStatus } from '../../entities/payment.entity'
 
 @InputType()
@@ -19,7 +18,4 @@ export class PaymentInput {
 
   @Field()
   status: PaymentStatus
-
-  @Field(() => ID)
-  identifier_client: ObjectId
 }

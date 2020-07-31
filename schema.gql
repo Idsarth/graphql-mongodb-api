@@ -8,6 +8,7 @@ type Client {
   _id: ID!
   created_at: DateTime!
   identifier: String!
+  identifier_payments: [Payment!]!
   name: String!
   phone: String!
 }
@@ -24,8 +25,9 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Mutation {
+  addPaymentToClient(id: ID!, variables: PaymentInput!): Client!
+  changePaymentStatus(id: ID!, status: payment_status!): Boolean!
   createClient(variables: ClientInput!): Client!
-  createPayment(variables: PaymentInput!): Payment!
   deleteClient(id: String!): Boolean!
   updateClient(id: String!, variables: ClientInput!): Boolean!
 }
@@ -37,7 +39,6 @@ type Payment {
   coin: String!
   created_at: DateTime!
   identifier: String!
-  identifier_client: String!
   product_name: String!
   status: payment_status!
 }
@@ -49,11 +50,18 @@ enum payment_status {
   PENDING
 }
 
+type PaymentFilter {
+  avg_amount: Float!
+  id_client: String!
+  name_client: String!
+  total_amount: Float!
+  total_pay: Float!
+}
+
 input PaymentInput {
   amount: Float!
   coin: String!
   identifier: String!
-  identifier_client: ID!
   product_name: String!
   status: String!
 }
@@ -61,4 +69,5 @@ input PaymentInput {
 type Query {
   allClient: [Client!]!
   allPayment: [Payment!]!
+  clientWithRegisteredPayment(status: payment_status!): [PaymentFilter!]!
 }
